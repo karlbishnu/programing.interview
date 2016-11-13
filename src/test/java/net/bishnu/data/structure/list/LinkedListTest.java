@@ -1,5 +1,7 @@
-package net.bishnu.data.structure;
+package net.bishnu.data.structure.list;
 
+import net.bishnu.data.structure.list.LinkedList;
+import net.bishnu.data.structure.list.List;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

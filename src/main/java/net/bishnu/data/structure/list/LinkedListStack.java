@@ -1,4 +1,4 @@
-package net.bishnu.data.structure;
+package net.bishnu.data.structure.list;
 
 /**
  * Created by karlb on 2016-11-05.
