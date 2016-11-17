@@ -3,7 +3,7 @@ package net.bishnu.data.structure.list;
 /**
  * Created by karlb on 2016-11-05.
  */
-public class LinkedListStack<T> implements Stack<T> {
+public class LinkedStack<T> implements Stack<T> {
     private int size = 0;
     private LinkedList<T> linkedList = new LinkedList<T>();
 
