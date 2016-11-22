@@ -61,19 +61,49 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
 
     @Override
     public String toString(){
+        if(size < 1) return "Tree is empty.";
+
         Node curr = root;
-        Queue<T> queue = new LinkedQueue<T>();
-        queue.enqueue(root.value);
+        Queue<QueueElement<Node<T>>> queue = new LinkedQueue<>();
+        queue.enqueue(new QueueElement<>(root, 0));
         StringBuilder sb = new StringBuilder();
 
-        sb = printTree(root, sb, queue);
+        sb = printTree(sb, queue);
         return sb.toString();
     }
 
-    private StringBuilder printTree(Node<T> root, StringBuilder sb, Queue<T> queue) {
-        sb.append(queue.dequeue());
-        /*queue.enqueue(root.left.value);
-        queue.enqueue();*/
-        return null;
+    private class QueueElement<T>{
+        final T node;
+        final int level;
+
+        QueueElement(T node, int level){
+            this.node = node;
+            this.level = level;
+        }
+    }
+
+    private StringBuilder printTree(StringBuilder sb, Queue<QueueElement<Node<T>>> queue) {
+        int currLevel = -1;
+
+        while(!queue.isEmpty()){
+            QueueElement<Node<T>> e = queue.dequeue();
+
+            if(e.level > currLevel){
+                sb.append(System.lineSeparator());
+                currLevel++;
+            }else{
+                sb.append('\t');
+            }
+            sb.append(e.node.value);
+            if(e.node.left != null){
+                queue.enqueue(new QueueElement<>(e.node.left, e.level+1));
+            }
+            if(e.node.right != null){
+                queue.enqueue(new QueueElement<>(e.node.right, e.level+1));
+            }
+
+        }
+
+        return sb;
     }
 }

@@ -8,14 +8,15 @@ import org.junit.Test;
 public class BinarySearchTreeTest {
     @Test
     public void addTest(){
-        int[] test = new int[]{5,1,3, 6};
+        int[] test = new int[]{5,1,3, 6, 5, 1, 2,34,30};
 
         Tree<Integer> tree = new BinarySearchTree<>();
         for (int element :
                 test) {
             tree.add(element);
-            System.out.println(tree.toString());
         }
+
+        System.out.println(tree.toString());
 
     }
 }
