@@ -56,7 +56,12 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
 
     @Override
     public int getHeight() {
-        return 0;
+        return getHeight(root);
+    }
+
+    private int getHeight(Node<T> root) {
+        if(root == null) return 0;
+        return Math.max(getHeight(root.left)+1, getHeight(root.right)+1);
     }
 
     @Override
