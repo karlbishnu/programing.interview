@@ -44,4 +44,43 @@ public class BinarySearchTreeTest {
         }
         assertEquals(2, tree.getHeight());
     }
+
+    @Test
+    public void testIsBalancedWhenSingleNodeShouldReturnTrue(){
+        int[] input = new int[]{1};
+
+        BalancedTree<Integer> tree = new BinarySearchTree<>();
+        for (int element :
+                input) {
+            tree.add(element);
+        }
+
+        assertTrue(tree.isBalanced());
+    }
+
+    @Test
+    public void testIsBalancedWhenTowNodeShouldReturnTrue(){
+        int[] input = new int[]{5,1};
+
+        BalancedTree<Integer> tree = new BinarySearchTree<>();
+        for (int element :
+                input) {
+            tree.add(element);
+        }
+
+        assertTrue(tree.isBalanced());
+    }
+
+    @Test
+    public void testIsBalancedShouldReturnFalse(){
+        int[] input = new int[]{1, 2, 3};
+
+        BalancedTree<Integer> tree = new BinarySearchTree<>();
+        for (int element :
+                input) {
+            tree.add(element);
+        }
+
+        assertFalse(tree.isBalanced());
+    }
 }

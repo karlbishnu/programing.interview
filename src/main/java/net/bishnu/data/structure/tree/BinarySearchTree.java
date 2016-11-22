@@ -6,7 +6,7 @@ import net.bishnu.data.structure.list.Queue;
 /**
  * Created by karlb on 2016-11-13.
  */
-public class BinarySearchTree<T extends Comparable> implements Tree<T> {
+public class BinarySearchTree<T extends Comparable> implements BalancedTree<T> {
     private Node<T> root;
     private int size;
 
@@ -62,6 +62,12 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
     private int getHeight(Node<T> root) {
         if(root == null) return 0;
         return Math.max(getHeight(root.left)+1, getHeight(root.right)+1);
+    }
+
+    @Override
+    public boolean isBalanced() {
+        if(size < 1)    throw new IllegalStateException("Tree is empty");
+        return Math.abs(getHeight(root.left) - getHeight(root.right)) < 2;
     }
 
     @Override
