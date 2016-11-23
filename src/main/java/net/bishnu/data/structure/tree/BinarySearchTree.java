@@ -67,6 +67,11 @@ public class BinarySearchTree<T extends Comparable> implements BalancedTree<T> {
     @Override
     public boolean isBalanced() {
         if(size < 1)    throw new IllegalStateException("Tree is empty");
+        return isBalanced(root);
+    }
+
+    private boolean isBalanced(Node<T> root){
+        if(root == null) return true;
         return Math.abs(getHeight(root.left) - getHeight(root.right)) < 2;
     }
 
