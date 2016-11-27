@@ -1,6 +1,10 @@
 package net.bishnu.data.structure.tree;
 
 import org.junit.Test;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 /**
  * Created by karlb on 2016-11-13.
@@ -82,5 +86,37 @@ public class BinarySearchTreeTest {
         }
 
         assertFalse(tree.isBalanced());
+    }
+
+    @Test
+    public void testGetSortedArray(){
+        Integer[] input = new Integer[]{5,2,0,3,-1,1,-2,6,8,7};
+
+        BalancedTree<Integer> tree = new BinarySearchTree<>();
+        for (int element :
+                input) {
+            tree.add(element);
+        }
+
+        Arrays.sort(input);
+        Integer[] sortedInput = tree.getSortedArray();
+        Arrays.equals(input, sortedInput);
+    }
+
+    @Test
+    public void testBalanceTree(){
+        Integer[] input = new Integer[100];
+        Arrays.setAll(input, (i)->i+1);
+
+        BalancedTree<Integer> tree = new BinarySearchTree<>();
+        for (int element :
+                input) {
+            tree.add(element);
+        }
+
+        System.out.println(tree.getHeight());
+        tree.balanceTree();
+        System.out.println(tree.getHeight());
+        System.out.println(tree);
     }
 }

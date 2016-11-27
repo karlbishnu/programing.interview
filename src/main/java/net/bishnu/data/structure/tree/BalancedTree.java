@@ -5,4 +5,5 @@ package net.bishnu.data.structure.tree;
  */
 public interface BalancedTree<T> extends Tree<T> {
     boolean isBalanced();
+    void balanceTree();
 }

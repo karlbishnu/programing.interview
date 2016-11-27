@@ -7,7 +7,9 @@ public interface Tree<T> {
     void add(T value);
     T getRoot();
     void remove(T value);
+    void clean();
     boolean contains(T value);
     int size();
     int getHeight();
+    T[] getSortedArray();
 }
