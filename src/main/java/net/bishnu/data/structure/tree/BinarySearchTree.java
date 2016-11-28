@@ -126,8 +126,7 @@ public class BinarySearchTree<T extends Comparable> implements BalancedTree<T> {
     }
 
     private boolean isBalanced(Node<T> root){
-        if(root == null) return true;
-        return Math.abs(getHeight(root.left) - getHeight(root.right)) < 2;
+        return root == null || Math.abs(getHeight(root.left) - getHeight(root.right)) < 2;
     }
 
 
@@ -192,15 +191,10 @@ public class BinarySearchTree<T extends Comparable> implements BalancedTree<T> {
         }
 
         private void enqueue(Node<T> root) {
-            if(root.left != null){
-                enqueue(root.left);
-            }
-
+            if(root == null)    return;
+            enqueue(root.left);
             queue.enqueue(root.value);
-
-            if(root.right != null){
-                enqueue(root.right);
-            }
+            enqueue(root.right);
         }
 
         @Override
