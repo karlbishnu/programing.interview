@@ -1,17 +1,20 @@
 package net.bishnu.data.structure.tree;
 
+import net.bishnu.data.structure.array.QuickSort;
+import net.bishnu.data.structure.array.Sort;
 import net.bishnu.data.structure.list.LinkedQueue;
 import net.bishnu.data.structure.list.Queue;
 
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
-import java.util.Objects;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.TreeMap;
 
 /**
  * Created by karlb on 2016-11-13.
  */
-public class BinarySearchTree<T extends Comparable> implements BalancedTree<T> {
+public class BinarySearchTree<T extends Comparable<T>> implements BalancedTree<T> {
     private Node<T> root;
     private int size;
 
@@ -183,7 +186,7 @@ public class BinarySearchTree<T extends Comparable> implements BalancedTree<T> {
         T next();
     }
 
-    private class InorderIterator<T> implements Iterator<T>{
+    private class InorderIterator<T extends Comparable<T>> implements Iterator<T>{
         Queue<T> queue;
         InorderIterator(Node<T> root){
             this.queue = new LinkedQueue<T>();
@@ -206,5 +209,44 @@ public class BinarySearchTree<T extends Comparable> implements BalancedTree<T> {
         public T next() {
             return queue.dequeue();
         }
+    }
+
+    public void convertTreeToHeap(){
+        Node[] array = convertTreeToArray(root);
+        Arrays.sort(array, new Comparator<Node>() {
+            @Override
+            public int compare(Node o1, Node o2) {
+                return o1.value.compareTo(o2.value);
+            }
+
+        });
+
+        for(int i=0; i<array.length; i++){
+            int left = 2*i + 1;
+            int right = 2*i + 2;
+            array[i].left = left<array.length ? array[left] : null;
+            array[i].right = right<array.length ? array[right] : null;
+        }
+
+        root = array[0];
+    }
+
+    private Node[] convertTreeToArray(Node<T> root) {
+        int size = traverse(null, root, 0);
+        Node[] array = new Node[size];
+
+        traverse(array, root, 0);
+        return array;
+    }
+
+    private int traverse(Node[] array, Node<T> root, int i) {
+        if(root == null) return i;
+        if(array != null){
+            array[i] = root;
+        }
+        i++;
+        i = traverse(array, root.left, i);
+        i = traverse(array, root.right, i);
+        return i;
     }
 }

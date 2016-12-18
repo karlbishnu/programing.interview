@@ -3,7 +3,7 @@ package net.bishnu.data.structure.tree;
 /**
  * Created by karlb on 2016-11-13.
  */
-class Node<T> {
+class Node<T extends Comparable<T>> {
     final T value;
     Node left;
     Node right;

@@ -1,5 +1,6 @@
 package net.bishnu.data.structure.tree;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -118,5 +119,22 @@ public class BinarySearchTreeTest {
         tree.balanceTree();
         System.out.println(tree.getHeight());
         System.out.println(tree);
+    }
+
+    @Test
+    public void test(){
+        Integer[] input = new Integer[]{5,2,0,3,-1,1,-2,6,8,7};
+
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        for (int element :
+                input) {
+            tree.add(element);
+        }
+
+        Arrays.sort(input);
+        tree.convertTreeToHeap();
+
+        Assert.assertSame(-2, tree.getRoot());
+        System.out.println(tree.toString());
     }
 }
