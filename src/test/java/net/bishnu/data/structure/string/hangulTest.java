@@ -36,6 +36,16 @@ public class hangulTest {
         }
     }
 
+    @Test
+    public void printAllHangulJamoAsUtf8Encoded() throws UnsupportedEncodingException {
+        int startIndex = Integer.parseInt("E18480", 16);
+        int endIndex = Integer.parseInt("E187BF", 16) +1;
+
+        for(int i=startIndex; i<endIndex; i++){
+            print(new String(intToByteArray(i), "utf8"));
+        }
+    }
+
     public static final byte[] intToByteArray(int value) {
         return new byte[] {
                 (byte)(value >>> 16),
