@@ -11,8 +11,8 @@ public class hangulTest {
     @Test
     public void printHangulMorphemesAndVowelsAsUtf8Encoded() throws UnsupportedEncodingException {
         String[] MorphemesAndVowels = {"ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄸ",
-                "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ"
-,                "ㅁ", "ㅂ", "ㅃ","ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ",
+                "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ",
+                "ㅁ", "ㅂ", "ㅃ","ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ",
                 "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ","ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ",
                 "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"};
         for(String s: MorphemesAndVowels){
