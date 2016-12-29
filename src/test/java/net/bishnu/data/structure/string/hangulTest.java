@@ -10,7 +10,7 @@ import java.io.UnsupportedEncodingException;
  */
 public class hangulTest {
     @Test
-    public void printHangulConsonantsAndVowelsAsUtf8Encoded() throws UnsupportedEncodingException {
+    public void printModernHangulConsonantsAndVowelsAsUtf8Encoded() throws UnsupportedEncodingException {
         String[] ConsonantsAndVowels = {"ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄸ",
                 "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ",
                 "ㅁ", "ㅂ", "ㅃ","ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ",
@@ -22,7 +22,7 @@ public class hangulTest {
     }
 
     @Test
-    public void printUtf8CharactersBetweenTheEndOfTheVowelAndTheBeginningOfTheMorphemeOfHangul() throws UnsupportedEncodingException {
+    public void printUtf8CharactersBetweenTheEndOfTheVowelAndTheBeginningOfTheMorphemeOfModernHangul() throws UnsupportedEncodingException {
         byte[] start = "ㅣ".getBytes("utf-8");
         byte[] end = "가".getBytes("utf-8");
         int startIndex = Integer.parseInt(bytesToHex(start), 16)+1;
