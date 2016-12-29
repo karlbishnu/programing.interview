@@ -46,6 +46,16 @@ public class hangulTest {
         }
     }
 
+    @Test
+    public void printAllSyllableAsUtf8Encoded() throws UnsupportedEncodingException {
+        int startIndex = Integer.parseInt("EAB080", 16);
+        int endIndex = Integer.parseInt("ED9EAF", 16) +1;
+
+        for(int i=startIndex; i<endIndex; i++){
+            print(new String(intToByteArray(i), "utf8"));
+        }
+    }
+
     public static final byte[] intToByteArray(int value) {
         return new byte[] {
                 (byte)(value >>> 16),
