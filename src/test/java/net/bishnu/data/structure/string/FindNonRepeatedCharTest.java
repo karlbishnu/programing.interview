@@ -13,7 +13,7 @@ public class FindNonRepeatedCharTest {
     @Test
     public void ShouldReturnFirstChar(){
         String input = "abc";
-        Character expected = 'a';
+        String expected = "a";
 
         Assert.assertEquals(expected, findFirstNonRepeatedChar(input));
     }
@@ -21,7 +21,7 @@ public class FindNonRepeatedCharTest {
     @Test
     public void ShouldReturn가(){
         String input = "가나다";
-        Character expected = '가';
+        String expected = "가";
 
         Assert.assertEquals(expected, findFirstNonRepeatedChar(input));
     }
@@ -29,26 +29,32 @@ public class FindNonRepeatedCharTest {
     @Test
     public void ShouldReturnNull(){
         String input = "가가가";
-        Character expected = null;
+        String expected = null;
 
         Assert.assertEquals(expected, findFirstNonRepeatedChar(input));
     }
 
-    private Character findFirstNonRepeatedChar(String input) {
-        Map<Character, Integer> countMap = new HashMap<>();
-        char[] charArray = input.toCharArray();
+    @Test
+    public void ShouldReturnSmile(){
+        String input = "😊가";
+        String expected = "😊";
+        Assert.assertEquals(expected, findFirstNonRepeatedChar(input));
+    }
 
-        for(char aChar : charArray){
+    private static String findFirstNonRepeatedChar(String input) {
+        Map<Integer, Integer> countMap = new HashMap<>();
+
+        for(int i=0; i<input.length(); i++){
             int count;
-            count = countMap.containsKey(aChar) ?
-                    countMap.get(aChar) + 1:
+            count = countMap.containsKey(input.codePointAt(i)) ?
+                    countMap.get(input.codePointAt(i)) + 1:
                     1;
 
-            countMap.put(aChar, count);
+            countMap.put(input.codePointAt(i), count);
         }
 
-        for(char aChar : charArray){
-            if(countMap.get(aChar) == 1)    return aChar;
+        for(int i=0; i<input.length(); i++){
+            if(countMap.get(input.codePointAt(i)) == 1)    return new String(Character.toChars(input.codePointAt(i)));
         }
         return null;
     }
