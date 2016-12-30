@@ -36,26 +36,29 @@ public class FindNonRepeatedCharTest {
 
     @Test
     public void ShouldReturnSmile(){
-        String input = "😊가";
-        String expected = "😊";
+        String input = String.valueOf(Character.toChars(0x1F60A)) + "가";
+        String expected = String.valueOf(Character.toChars(0x1F60A));
         Assert.assertEquals(expected, findFirstNonRepeatedChar(input));
     }
 
     private static String findFirstNonRepeatedChar(String input) {
-        Map<Integer, Integer> countMap = new HashMap<>();
+        Map<Integer, Boolean> countMap = new HashMap<>();
 
         for(int i=0; i<input.length();){
-            int count;
-            count = countMap.containsKey(input.codePointAt(i)) ?
-                    countMap.get(input.codePointAt(i)) + 1:
-                    1;
+            int codePoint = input.codePointAt(i);
+            Boolean isNonRepeated = countMap.containsKey(codePoint) ?
+                    Boolean.FALSE:
+                    Boolean.TRUE;
 
-            countMap.put(input.codePointAt(i), count);
+            countMap.put(input.codePointAt(i), isNonRepeated);
             i += Character.charCount(input.codePointAt(i));
         }
 
-        for(int i=0; i<input.length(); i++){
-            if(countMap.get(input.codePointAt(i)) == 1)    return new String(Character.toChars(input.codePointAt(i)));
+        for(int i=0; i<input.length();){
+            int codePoint = input.codePointAt(i);
+            if(countMap.get(codePoint))    return new String(Character.toChars(input.codePointAt(i)));
+            i += Character.charCount(codePoint);
+
         }
         return null;
     }
