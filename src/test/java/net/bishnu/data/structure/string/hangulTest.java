@@ -18,6 +18,8 @@ public class hangulTest {
                 "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"};
         for(String s: ConsonantsAndVowels){
             print(s);
+            if(Character.UnicodeBlock.of(s.charAt(0)) == Character.UnicodeBlock.SPECIALS)  continue;
+            Assert.assertEquals(Character.UnicodeBlock.HANGUL_COMPATIBILITY_JAMO, Character.UnicodeBlock.of(s.charAt(0)));
         }
     }
 
@@ -42,7 +44,10 @@ public class hangulTest {
         int endIndex = Integer.parseInt("E187BF", 16) +1;
 
         for(int i=startIndex; i<endIndex; i++){
-            print(new String(intToByteArray(i), "utf8"));
+            String string = new String(intToByteArray(i), "utf8");
+            print(string);
+            if(Character.UnicodeBlock.of(string.charAt(0)) == Character.UnicodeBlock.SPECIALS)  continue;
+            Assert.assertEquals(Character.UnicodeBlock.HANGUL_JAMO, Character.UnicodeBlock.of(string.charAt(0)));
         }
     }
 
@@ -52,9 +57,14 @@ public class hangulTest {
         int endIndex = Integer.parseInt("ED9EAF", 16) +1;
 
         for(int i=startIndex; i<endIndex; i++){
-            print(new String(intToByteArray(i), "utf8"));
+            String string = new String(intToByteArray(i), "utf8");
+            print(string);
+            if(Character.UnicodeBlock.of(string.charAt(0)) == Character.UnicodeBlock.SPECIALS)  continue;
+            Assert.assertEquals(Character.UnicodeBlock.HANGUL_SYLLABLES, Character.UnicodeBlock.of(string.charAt(0)));
         }
     }
+
+
 
     public static final byte[] intToByteArray(int value) {
         return new byte[] {
@@ -64,7 +74,7 @@ public class hangulTest {
     }
 
     private void print(String str) throws UnsupportedEncodingException {
-        if(str.startsWith("�")) return;
+        if(Character.UnicodeBlock.of(str.charAt(0)) == Character.UnicodeBlock.SPECIALS)  return;
         StringBuilder sb = new StringBuilder();
         sb.append(str)
                 .append(" :")
