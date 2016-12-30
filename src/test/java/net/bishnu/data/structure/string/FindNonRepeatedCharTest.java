@@ -44,13 +44,14 @@ public class FindNonRepeatedCharTest {
     private static String findFirstNonRepeatedChar(String input) {
         Map<Integer, Integer> countMap = new HashMap<>();
 
-        for(int i=0; i<input.length(); i++){
+        for(int i=0; i<input.length();){
             int count;
             count = countMap.containsKey(input.codePointAt(i)) ?
                     countMap.get(input.codePointAt(i)) + 1:
                     1;
 
             countMap.put(input.codePointAt(i), count);
+            i += Character.charCount(input.codePointAt(i));
         }
 
         for(int i=0; i<input.length(); i++){
