@@ -33,4 +33,30 @@ public class LRUCacheTest {
         Assert.assertEquals(-1,cache.get(2));
         Assert.assertEquals(2,cache.get(3));
     }
+
+    @Test
+    public void test3(){
+        LRUCache cache = new LRUCache( 2 /* capacity */ );
+
+        cache.put(2, 1);
+        cache.put(2, 2);
+        Assert.assertEquals(2,cache.get(2));
+
+        cache.put(1, 1);
+        cache.put(4, 1);
+        Assert.assertEquals(-1,cache.get(2));
+    }
+
+
+    @Test
+    public void test4(){
+        LRUCache cache = new LRUCache( 2 /* capacity */ );
+
+        cache.put(2, 1);
+        cache.put(1, 1);
+        cache.put(2, 3);
+        cache.put(4, 1);
+        Assert.assertEquals(-1,cache.get(1));
+        Assert.assertEquals(3,cache.get(2));
+    }
 }
