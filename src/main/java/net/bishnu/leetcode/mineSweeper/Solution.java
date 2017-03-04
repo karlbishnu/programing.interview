@@ -22,7 +22,7 @@ public class Solution {
 
     private char[][] open(char[][] board, int[] click) {
         int row = click[0], col = click[1];
-        if( !isInBoundary(board, row, col) || board[row][col] == 'M' || board[row][col] != 'E'){
+        if( !isInBoundary(board, row, col) || board[row][col] != 'E'){
             return board;
         }
 
