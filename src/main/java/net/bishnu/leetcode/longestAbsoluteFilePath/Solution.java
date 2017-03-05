@@ -36,7 +36,19 @@ public class Solution {
         for(int i=offset; i<input.length(); i++){
             char aChar = input.charAt(i);
 
-            if(aChar =='/'){
+            if(aChar == '\n'){
+                name = isDir ? sbWithoutWhiteSpace.toString() : sb.toString();
+
+                Entity entity = new Entity(root, name, level, isDir);
+                if(isDir){
+                    i=makeTree(input, i+1, entity);
+                }
+
+                sb.setLength(0);
+                sbWithoutWhiteSpace.setLength(0);
+                level = 0;
+                isDir = true;
+            }else if(aChar =='/'){
                 Entity parent = getParent(dir, level);
                 name = isDir ? sbWithoutWhiteSpace.toString() : sb.toString();
 
@@ -77,8 +89,6 @@ public class Solution {
             Entity entity = new Entity(parent, name, level, isDir);
             if(parent != null){
                 parent.map.put(entity.name, entity);
-            }else {
-                root = entity;
             }
         }
 
@@ -87,7 +97,7 @@ public class Solution {
 
     private Entity getParent(Entity dir, int level) {
         Entity curr = dir;
-        while(curr != null && level != 0 && curr.level >= level){
+        while(curr != null && level != -1 && curr.level >= level){
             curr = curr.parent;
         }
         return curr;
@@ -106,7 +116,7 @@ public class Solution {
                         path :
                         aString;
             }
-            path = root.name +"/"+path;
+            path = root.name!=null ? root.name +"/"+path : path;
         }else{
             path = root.name;
         }
@@ -115,8 +125,9 @@ public class Solution {
     }
 
     public int lengthLongestPath(String input){
-        input.replaceAll("\\n\\t", "/");
-        makeTree(input, 0, null);
+        input.replaceAll("\n\t", "/");
+        root = new Entity(null, null, -1, true);
+        makeTree(input, 0, root);
         String longestPath = traverse(root);
         return longestPath.contains(".") ? longestPath.length() : 0;
     }
