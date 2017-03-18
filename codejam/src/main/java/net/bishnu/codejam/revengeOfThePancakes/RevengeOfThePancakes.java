@@ -1,17 +1,16 @@
-package net.bishnu.codejam;
+package net.bishnu.codejam.revengeOfThePancakes;
 
 /**
  * Created by karlb on 2017-03-17.
+ * https://code.google.com/codejam/contest/6254486/dashboard#s=p1
  */
 
 import java.io.*;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.StringTokenizer;
 
 
-public class CountingSheep {
-    public static final String NAME = "A-small-practice";
+public class RevengeOfThePancakes {
+    public static final String NAME = "B-large-practice";
     private static boolean SUBMIT = true;
     private static InputReader in;
     private static PrintWriter out;
@@ -20,7 +19,8 @@ public class CountingSheep {
         if (SUBMIT) {
             in = new InputReader(new FileInputStream(new File(NAME + ".in")));
             out = new PrintWriter(new BufferedWriter(new FileWriter(NAME + ".out")));
-        } else {            in = new InputReader(System.in);
+        } else {
+            in = new InputReader(System.in);
             out = new PrintWriter(System.out, true);
         }
 
@@ -60,29 +60,40 @@ public class CountingSheep {
         }
     }
 
+    static int count = 0;
     private static void main2() {
-        Set<Integer> set = new HashSet<Integer>();
+        count = 0;
+        String input = in.next();
+        StringBuilder pancakes = new StringBuilder(input);
 
-        int input = in.nextInt();
-        if(input == 0) {
-            out.print("INSOMNIA");
-            return;
-        }
-        int m = input, curr = input;
-        int i = 1;
-        while(m >= 0){
-            set.add(m%10);
-            if(set.size() == 10){
-                out.print(curr);
-                break;
-            }
+        search(pancakes);
 
-            if(m<10){
-                m = curr = input * ++i;
-            }else{
-                m /= 10;
-            }
+        out.print(count);
+    }
+
+    private static String search(StringBuilder pancakes) {
+        char e = pancakes.charAt(pancakes.length()-1);
+        char s = pancakes.charAt(0);
+
+        if(e == '-' && s == '-'){
+            pancakes = reverse(pancakes, pancakes.length()-1);
+        }else if(e=='-' && s=='+'){
+            pancakes = reverse(pancakes, pancakes.lastIndexOf("+"));
         }
+        int bottom = pancakes.lastIndexOf("-");
+        if(bottom != -1){
+            String subPancakes = search(new StringBuilder(pancakes.substring(0, bottom+1)));
+            pancakes.replace(0, subPancakes.length(), subPancakes);
+        }
+        return pancakes.toString();
+    }
+
+    private static StringBuilder reverse(StringBuilder pancakes, int bottom){
+        for(int i=0; i<=bottom; i++){
+            pancakes.setCharAt(i, pancakes.charAt(i)=='+' ? '-' : '+');
+        }
+        count++;
+        return pancakes;
     }
 
 }
