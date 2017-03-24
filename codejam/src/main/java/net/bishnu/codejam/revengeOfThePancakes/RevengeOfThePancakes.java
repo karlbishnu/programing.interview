@@ -60,40 +60,24 @@ public class RevengeOfThePancakes {
         }
     }
 
-    static int count = 0;
     private static void main2() {
-        count = 0;
+        int count = 0;
         String input = in.next();
-        StringBuilder pancakes = new StringBuilder(input);
+        StringBuilder sb = new StringBuilder(input);
 
-        search(pancakes);
+        char blank = '-';
+        while(sb.length() != 0){
+            int lastBlank = sb.lastIndexOf(String.valueOf(blank));
+            if(lastBlank != -1){
+                sb.setLength(lastBlank+1);
+                count++;
+                blank = blank=='-' ? '+' : '-';
+            }else{
+                sb.setLength(0);
+            }
+        }
 
         out.print(count);
-    }
-
-    private static String search(StringBuilder pancakes) {
-        char e = pancakes.charAt(pancakes.length()-1);
-        char s = pancakes.charAt(0);
-
-        if(e == '-' && s == '-'){
-            pancakes = reverse(pancakes, pancakes.length()-1);
-        }else if(e=='-' && s=='+'){
-            pancakes = reverse(pancakes, pancakes.lastIndexOf("+"));
-        }
-        int bottom = pancakes.lastIndexOf("-");
-        if(bottom != -1){
-            String subPancakes = search(new StringBuilder(pancakes.substring(0, bottom+1)));
-            pancakes.replace(0, subPancakes.length(), subPancakes);
-        }
-        return pancakes.toString();
-    }
-
-    private static StringBuilder reverse(StringBuilder pancakes, int bottom){
-        for(int i=0; i<=bottom; i++){
-            pancakes.setCharAt(i, pancakes.charAt(i)=='+' ? '-' : '+');
-        }
-        count++;
-        return pancakes;
     }
 
 }
