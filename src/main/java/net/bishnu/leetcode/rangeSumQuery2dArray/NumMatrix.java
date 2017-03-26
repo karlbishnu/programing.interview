@@ -8,6 +8,8 @@ public class NumMatrix {
     private int[][] bit;
 
     public NumMatrix(int[][] matrix){
+        if(matrix==null || matrix.length<1 || matrix[0].length<1 )
+            return;
         this.matrix = new int[matrix.length][matrix[0].length];
         this.bit = new int[matrix.length+1][matrix[0].length+1];
 
