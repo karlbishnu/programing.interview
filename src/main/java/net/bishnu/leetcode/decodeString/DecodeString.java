@@ -1,9 +1,5 @@
 package net.bishnu.leetcode.decodeString;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Stack;
-
 /**
  * 394. Decode String
  * https://leetcode.com/problems/decode-string/#/description
@@ -11,34 +7,30 @@ import java.util.Stack;
  */
 public class DecodeString {
     public String decodeString(String s) {
-        Deque<StringBuilder> stack = new LinkedList<>();
-        stack.push(new StringBuilder());
+        StringBuilder orgSb = new StringBuilder(s);
+        StringBuilder sb = new StringBuilder();
+        int lastBracketStart, lastRepeatCountStart;
 
-        boolean prevNumber = false;
-        for(int i=0; i<s.length(); i++){
-            char aChar = s.charAt(i);
-            if(aChar=='['){
-                stack.push(new StringBuilder());
-                prevNumber=false;
-            }else if(aChar==']'){
-                String substring = stack.poll().toString();
-                int count = Integer.parseInt(stack.poll().toString());
-                StringBuilder sb = stack.peek();
-                for(int j=0; j<count; j++){
-                    sb.append(substring);
-                }
-            }else if(aChar>='0' && aChar<='9'){
-                if(prevNumber){
-                    stack.peek().append(aChar);
-                }else{
-                    stack.push(new StringBuilder().append(aChar));
-                    prevNumber = true;
-                }
-            } else{
-                stack.peek().append(aChar);
+        while((lastBracketStart = orgSb.lastIndexOf("[")) != -1){
+            int lastBracketEnd = orgSb.indexOf("]", lastBracketStart);
+            lastRepeatCountStart = lastBracketStart-1;
+            char aChar = orgSb.charAt(lastRepeatCountStart);
+
+            while(aChar>='0' && aChar<='9' && lastRepeatCountStart>0){
+                aChar = orgSb.charAt(--lastRepeatCountStart);
             }
+            lastRepeatCountStart += lastRepeatCountStart<=0 ? 0 : 1;
+            int repeatCount = Integer.parseInt(orgSb.substring(lastRepeatCountStart, lastBracketStart));
+            String subString = orgSb.substring(lastBracketStart+1, lastBracketEnd);
+
+            for(int i=0; i<repeatCount; i++){
+                sb.append(subString);
+            }
+            orgSb.replace(lastRepeatCountStart, lastBracketEnd+1, sb.toString());
+            sb.setLength(0);
+
         }
 
-        return stack.poll().toString();
+        return orgSb.toString();
     }
 }

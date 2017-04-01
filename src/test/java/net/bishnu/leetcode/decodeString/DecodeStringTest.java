@@ -40,4 +40,13 @@ public class DecodeStringTest {
         DecodeString solution = new DecodeString();
         Assert.assertEquals(expected, solution.decodeString(input));
     }
+
+    @Test
+    public void decodeString4() throws Exception{
+        String input = "aaa";
+        String expected = "aaa";
+
+        DecodeString solution = new DecodeString();
+        Assert.assertEquals(expected, solution.decodeString(input));
+    }
 }
