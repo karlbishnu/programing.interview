@@ -39,11 +39,24 @@ public class MissingRangeTest {
 
     @Test
     public void findMissingRanges3() throws Exception {
+        System.out.println(Integer.MIN_VALUE);
+        int lower = -2147483648;
+        int upper = 2147483647;
+        List<String> list = MissingRange.findMissingRanges(new int[]{-2147483648,-2147483648,0,2147483647,2147483647}, lower, upper);
+        List<String> expected = new LinkedList<>();
+        expected.add("-2147483647->-1");
+        expected.add("1->2147483646");
+        assertEquals(expected, list);
+    }
+
+    @Test
+    public void findMissingRanges4() throws Exception {
         int lower = -1;
         int upper = 11;
         List<String> list = MissingRange.findMissingRanges(new int[]{0,10}, lower, upper);
         List<String> expected = new LinkedList<>();
         expected.add(String.valueOf(lower));
+        expected.add("1->9");
         expected.add(String.valueOf(upper));
         assertEquals(expected, list);
     }
@@ -59,5 +72,7 @@ public class MissingRangeTest {
         assertEquals(-4, Arrays.binarySearch(array, 4));
         assertEquals(-3, Arrays.binarySearch(array, 2));
     }
+
+
 
 }
