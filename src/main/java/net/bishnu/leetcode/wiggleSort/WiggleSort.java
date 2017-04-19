@@ -9,13 +9,21 @@ import java.util.Arrays;
  */
 public class WiggleSort {
     public static void wiggleSort(int[] nums) {
-        Arrays.sort(nums);
-        int[] result = new int[nums.length];
-        result[0] = nums[0];
-        int backward = nums.length-1, forward = 1;
-        for(int i=1; i<result.length; i++){
-            result[i] = nums[i%2==0 ? forward++ : backward--];
+        if(nums==null)  return;
+        for(int i=0; i<nums.length; i++){
+            if(i%2==0){
+                if(nums[i]>nums[i+1])
+                    swap(nums, i, i+1);
+            }else {
+                if(nums[i]<nums[i+1])
+                    swap(nums, i, i+1);
+            }
         }
-        System.arraycopy(result, 0, nums, 0, result.length);
+    }
+
+    private static void swap(int[] nums, int i, int i1) {
+        int tmp = nums[i];
+        nums[i] = nums[i1];
+        nums[i1] = tmp;
     }
 }
