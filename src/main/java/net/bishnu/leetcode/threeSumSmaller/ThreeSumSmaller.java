@@ -13,13 +13,10 @@ public class ThreeSumSmaller {
         int result = 0;
         for(int i=0; i<nums.length-2; i++){
             int targeti = nums[i];
-            if(targeti>target) break;
             for(int j=i+1; j<nums.length-1; j++){
                 int targetj = targeti+nums[j];
-                if(targetj>target) break;
-                for(int k=j+1; k<nums.length; k++){
-                    if(targetj+nums[k]>=target)   break;
-                    result++;
+                for(int k=nums.length-1; k>j; k--){
+                    if(targetj+nums[k]<target)   result++;
                 }
             }
         }
