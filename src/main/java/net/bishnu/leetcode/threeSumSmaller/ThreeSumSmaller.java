@@ -12,14 +12,13 @@ public class ThreeSumSmaller {
         Arrays.sort(nums);
         int result = 0;
         for(int i=0; i<nums.length-2; i++){
-            int targeti = nums[i];
-            if(targeti>target) break;
-            for(int j=i+1; j<nums.length-1; j++){
-                int targetj = targeti+nums[j];
-                if(targetj>target) break;
-                for(int k=j+1; k<nums.length; k++){
-                    if(targetj+nums[k]>=target)   break;
-                    result++;
+            int j=i+1, k=nums.length-1;
+            while(j<k){
+                if(nums[i]+nums[j]+nums[k]<target){
+                    result+= k-j;
+                    j++;
+                }else{
+                    k--;
                 }
             }
         }
