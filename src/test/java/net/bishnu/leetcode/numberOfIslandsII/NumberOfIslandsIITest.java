@@ -28,6 +28,22 @@ public class NumberOfIslandsIITest {
     }
 
     @Test
+    public void numIslands23() throws Exception {
+        NumberOfIslandsII solution = new NumberOfIslandsII();
+        int m=3, n=3;
+        int[][] positions = {{0,0}, {0,1}, {1,2}, {0,2}, {2,1}};
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(1);
+        expected.add(2);
+        expected.add(1);
+        expected.add(2);
+
+        assertEquals(expected, solution.numIslands2(m,n,positions));
+    }
+
+
+    @Test
     public void numIslands22() throws Exception {
         NumberOfIslandsII solution = new NumberOfIslandsII();
         int m=3, n=3;
