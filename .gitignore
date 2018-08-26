@@ -47,3 +47,10 @@ Temporary Items
 .apdisk
 /.idea
 /build
+
+#IntelliJ
+*.iml
+.idea
+
+#Gradle
+.gradle
