@@ -35,14 +35,13 @@ public class Main {
 
     static int maxOverlap(char[] s, char[] rev) {
         int[] pi = getPi(rev);
-        int max=0, j = 0;
+        int j = 0;
         for(int i=0; i<s.length; i++){
             while(j>0 && s[i]!=rev[j]){
-                max = 0;
                 j=pi[j-1];
             }
             if(s[i]==rev[j]){
-                max = Integer.max(max, ++j);
+                j++;
             }
         }
         return j;
